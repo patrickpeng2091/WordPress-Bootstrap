@@ -1,0 +1,18 @@
+Release 2.8
+1. Security Fixes
+
+Release 2.5
+1. Compatible with woocommerce 2.3.5
+
+Release 2.0
+1. About Retailer Page added 
+2. Review About Retailer added 
+3. Custom Css Support added 
+4. Option to enable/disable reviews 
+5. Option to enable/disable location
+6. Option to enable/disable price
+7. Option to enable/disable buying options
+8. Option to enable/disable Buy Now button
+9. Option to enable/disable name 
+
+Initial Release 1.0

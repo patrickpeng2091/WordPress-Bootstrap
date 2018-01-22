@@ -1,0 +1,524 @@
+//
+// Atum List Tables
+//------------------
+
+.overlay {
+	position: relative;
+	
+	&:before {
+		content: '';
+		@include overlay;
+	}
+}
+
+.atum-loading {
+	@include loader;
+}
+
+h1.wp-heading-inline {
+	line-height: 1.5;
+	position: relative;
+	
+	#atum-update-list {
+		margin-left: 5px;
+		border-radius: 0;
+		vertical-align: middle;
+		
+		&:active {
+			color: #FFF;
+			padding: 0 10px 1px;
+			box-shadow: 0 1px 0 #006799;
+		}
+	}
+	
+	.atum-loading {
+		display: inline-block;
+		top: 1px;
+		margin-left: 10px;
+		position: relative;
+	}
+}
+
+.atum-list-wrapper {
+	padding-bottom: 20px;
+	width: 100%;
+	overflow: hidden;
+	
+	.search-box {
+		input[type=search] {
+			margin-right: 0;
+			width: 187px;
+		}
+	}
+	
+	.search-submit {
+		margin-left: 4px;
+	}
+	
+	.tablenav-pages, .search-box {
+		position: relative;
+		
+		.atum-loading {
+			left: -30px;
+			top: 4px;
+		}
+	}
+	
+	.subsubsub {
+		position: relative;
+		margin-left: 3px;
+		
+		.atum-loading {
+			right: -25px;
+			top: 4px;
+		}
+	}
+	
+	&.loading-data {
+		.alignleft.actions {
+			position: relative;
+			overflow: visible;
+			
+			.atum-loading {
+				right: -15px;
+				top: 7px;
+			}
+		}
+	}
+	
+	.actions-wrapper {
+		
+		input, select, .select2-container {
+			height: 32px;
+			margin-bottom: 4px;
+			float: left;
+		}
+		
+		.select2-container {
+			margin-top: 1px;
+			margin-right: 5px;
+			font-size: 14px;
+			
+			&, * {
+				&:focus {
+					outline: none;
+				}
+			}
+			
+			&:focus {
+				.select2-selection {
+					box-shadow: 0 0 2px rgba($input-focus, .8);
+					border-color: $input-focus;
+				}
+			}
+			
+			.select2-selection__placeholder {
+				color: $gray-dark !important;
+			}
+			
+			.select2-selection__arrow {
+				b {
+					border-top-color: $gray-dark;
+				}
+			}
+		}
+		
+		
+		.filter-text {
+			display: inline;
+			float: left;
+			line-height: 28px;
+			padding-right: 10px;
+		}
+		
+	}
+	
+}
+
+// Enhanced Select fix
+.select2-dropdown {
+	.select2-results__option {
+		&:focus {
+			outline: none;
+		}
+	}
+}
+
+.atum-table-wrapper {
+	clear: both;
+	
+	// JScrollpane
+	.jspContainer {
+		overflow: hidden;
+		position: relative;
+	}
+	
+	.jspPane {
+		position: absolute;
+	}
+	
+	.jspVerticalBar, .jspCap, .jspArrow {
+		display: none;
+	}
+	
+	.jspHorizontalBar {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 16px;
+		
+		.jspCap {
+			float: left;
+		}
+		
+		.jspTrack, .jspDrag {
+			float: left;
+			height: 100%;
+		}
+		
+		.jspArrow {
+			width: 16px;
+			float: left;
+			height: 100%;
+		}
+	}
+	
+	.jspTrack {
+		background: rgba($gray, 0.2);
+		position: relative;
+	}
+	
+	.jspDrag {
+		background: $gray;
+		position: relative;
+		top: 0;
+		left: 0;
+		cursor: pointer;
+	}
+	
+	.jspCorner {
+		background: $gray-light;
+		float: left;
+		height: 100%;
+	}
+	
+}
+
+.atum-list-table {
+	margin-bottom: 15px;
+	
+	thead .item-heads, tfoot {
+		th {
+			padding: 3px 5px;
+			line-height: 1.1;
+			font-size: 13px;
+			min-width: 50px;
+			height: 42px;
+			
+			.dashicons {
+				font-size: 15px;
+				width: 1em;
+				height: 1em;
+			}
+		}
+	}
+	
+	.group {
+		th {
+			font-weight: bold;
+			
+			&:nth-child(even) {
+				background-color: $gray-light;
+			}
+		}
+	}
+	
+	thead .group th .atum-loading {
+		position: relative;
+		display: inline-block;
+		left: 15px;
+		top: 2px;
+		width: 10px;
+		height: 10px;
+	}
+	
+	th {
+		&.sortable, &.sorted {
+			a {
+				padding: 0;
+				@include flexbox;
+			}
+			
+			&[class*="column-calc_"], &.column-_stock, &.column-_regular_price, &.column-_sale_price,
+			&.column-_purchase_price, &.column-ID, &.column-_supplier_sku {
+				a {
+					@include flex-justify-content(center);
+					
+					> span {
+						float: none;
+						
+						&:first-child {
+							padding-left: 10px;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	tr {
+		
+		&.expanded {
+			@include transition(all 0.1s ease-in-out);
+			
+			&.variable, &.variable-subscription {
+				background-color: $brand-primary;
+			}
+			
+			&.group {
+				background-color: $brand-warning;
+			}
+			
+			td, a {
+				color: #FFF;
+			}
+			
+			.column-calc_type {
+				.has-child {
+					&:before {
+						content: "\e004";
+						color: #FFF;
+					}
+				}
+			}
+		}
+		
+		&.variation {
+			background-color: lighten($brand-primary, 50%);
+			
+			&:nth-child(even) {
+				background-color: lighten($brand-primary, 58%);
+			}
+		}
+		
+		&.grouped {
+			background-color: lighten($brand-warning, 32%);
+			
+			&:nth-child(even) {
+				background-color: lighten($brand-warning, 40%);
+			}
+		}
+		
+		&.no-items {
+			td {
+				padding: 10px 24px;
+			}
+		}
+		
+	}
+	
+	.cell {
+		&-green {
+			color: $brand-success;
+		}
+		
+		&-yellow {
+			color: $brand-warning;
+		}
+		
+		&-red {
+			color: $brand-danger;
+		}
+	}
+	
+	td, th {
+		vertical-align: middle;
+		padding: 6px 5px;
+		
+		&.pro-version {
+			background-color: $gray;
+		}
+		
+		&.column-title {
+			min-width: 150px;
+			
+			> span {
+				white-space: nowrap;
+			}
+		}
+		
+		&.column-sku {
+			min-width: 70px;
+		}
+		
+		&[class*="column-calc_"], &.column-_stock, &.column-_regular_price, &.column-_sale_price,
+		&.column-_purchase_price, &.column-ID, &.column-_supplier_sku {
+			text-align: center;
+		}
+		
+		a {
+			cursor: pointer;
+		}
+		
+	}
+	
+	.column-calc_type {
+		max-width: 50px;
+		text-align: center;
+		
+		.has-child {
+			cursor: pointer;
+			
+			&.variable, &.variable-subscription {
+				color: $brand-primary;
+			}
+			
+			&.variable-subscription {
+				&:before {
+					content: "\e003";
+				}
+			}
+			
+			&.grouped {
+				color: $brand-warning;
+			}
+			
+			&:hover {
+				&:before {
+					content: "\e005";
+				}
+			}
+		}
+		
+		.variation, .grouped-item {
+			&:before {
+				content: "\e039";
+			}
+		}
+		
+		.product-part, .raw-material {
+			display: block;
+			padding-top: 6px;
+		}
+	}
+	
+	.set-meta {
+		cursor: pointer;
+		color: $brand-primary;
+		
+		&.unsaved {
+			color: $brand-danger;
+		}
+	}
+	
+	.highlight-danger {
+		background-color: $brand-danger;
+		color: #FFF;
+		padding: 2px 3px;
+		border-radius: 2px;
+	}
+	
+	#calc_stock_out_days {
+		min-width: 56px;
+	}
+	
+	.column-calc_stock_indicator {
+		.dashicons {
+			font-size: 1.5em;
+		}
+	}
+	
+	.atum-title-small {
+		display: none;
+	}
+	
+	@media screen and (max-width: 782px) {
+		.group {
+			display: none;
+		}
+		
+		.column-thumb {
+			display: none;
+			
+			&:before {
+				content: none;
+			}
+		}
+		
+		tr:not(.inline-edit-row):not(.no-items) td.column-thumb:not(.column-primary)::before {
+			content: none;
+		}
+		
+		.tips {
+			display: none;
+		}
+		
+		.atum-title-small {
+			display: block;
+		}
+		
+		td.thumb.column-thumb {
+			text-align: left;
+		}
+	}
+}
+
+// Manage Stock notice
+.atum-notice {
+	@include flexbox;
+	@include flex-align-items(center);
+	
+	.manage-message {
+		position: relative;
+		@include flex-grow(1);
+	}
+	
+	.notice-dismiss {
+		top: 50%;
+		@include transform(translateY(-50%));
+	}
+	
+	.atum-loading {
+		margin-left: 5px;
+		margin-top: 5px;
+	}
+	
+	.add-manage-option {
+		margin-top: 3px;
+	}
+}
+
+// Help Tabs
+.contextual-help-tabs-wrap {
+	padding: 20px;
+	
+	table {
+		tr {
+			td {
+				&:first-child {
+					width: 20%;
+				}
+			}
+		}
+	}
+	
+	.dashicons-format-image {
+		font-size: 18px;
+	}
+	
+	.wc-type {
+		&:before {
+			font-family: WooCommerce;
+			content: "\e006";
+			font-size: 18px;
+			top: 0;
+			speak: none;
+			font-variant: normal;
+			text-transform: none;
+			-webkit-font-smoothing: antialiased;
+			left: 0;
+		}
+	}
+}
+

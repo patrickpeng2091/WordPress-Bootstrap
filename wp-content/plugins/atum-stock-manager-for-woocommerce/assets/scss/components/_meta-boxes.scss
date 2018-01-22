@@ -1,0 +1,371 @@
+//
+// Atum Meta Boxes
+//------------------
+
+.blockUI.blockOverlay {
+	
+	&:before {
+		content: '';
+		@include overlay($opacity: 1);
+	}
+	
+	&:after {
+		content: '';
+		top: 45%;
+		left: 0;
+		right: 0;
+		margin: auto;
+		@include loader(30px, $brand-info, 3px);
+		
+		.note & {
+			top: 38%;
+			@include loader(25px, $brand-info);
+		}
+	}
+	
+}
+
+// Common styles
+.atum-meta-box {
+	padding: $grid-gutter-width/2 10px;
+	@include clearfix;
+	
+	.form-field {
+		float: left;
+		clear: left;
+		width: 48%;
+		padding: 0;
+		margin: 9px 0 0;
+		color: #777;
+		
+		label {
+			display: block;
+			padding: 0 0 3px;
+		}
+		
+		> input, > select, > textarea {
+			width: 100%;
+		}
+		
+		input {
+			height: 32px;
+			border-radius: 4px;
+			box-shadow: none;
+		}
+		
+		.select2-container {
+			width: 100% !important;
+		}
+		
+		.date-picker {
+			width: 50%;
+		}
+		
+		small {
+			display: block;
+			margin: 5px 0 0;
+			color: #999;
+		}
+		
+		&.atum-editor {
+			margin-top: $grid-gutter-width/2;
+			
+			label {
+				margin-bottom: -$grid-gutter-width;
+			}
+		}
+		
+		&.form-field-wide {
+			width: 100%;
+			clear: both;
+			
+			> .wc-customer-search, > .wc-enhanced-select, > input, > select, > textarea {
+				width: 100%;
+			}
+		}
+		
+		.wp-editor-area {
+			border: none;
+		}
+	}
+	
+}
+
+//
+// Backbone modal dialog
+//-----------------------
+.wc-backbone-modal {
+	
+	* {
+		box-sizing: border-box;
+	}
+	
+	.wc-backbone-modal-content {
+		position: fixed;
+		background: #fff;
+		z-index: 100000;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 500px;
+		
+		article {
+			overflow: auto;
+		}
+	}
+	
+	&.wc-backbone-modal-shipping-method-settings {
+		.wc-backbone-modal-content {
+			width: 75%;
+			min-width: 500px;
+		}
+	}
+	
+	.select2-container {
+		width: 100% !important;
+	}
+	
+	.alert {
+		background-color: lighten($brand-primary, 35%);
+		padding: 4px 6px;
+		display: block;
+		font-size: 12px;
+		margin-bottom: 5px;
+	}
+	
+}
+
+.wc-backbone-modal-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	min-height: 360px;
+	background: #000;
+	opacity: 0.7;
+	z-index: 99900;
+}
+
+.wc-backbone-modal-main {
+	padding-bottom: 55px;
+	
+	header,
+	article {
+		display: block;
+		position: relative;
+	}
+	
+	.wc-backbone-modal-header {
+		height: auto;
+		background: #fcfcfc;
+		padding: 1em 1.5em;
+		border-bottom: 1px solid #ddd;
+		
+		h1 {
+			margin: 0;
+			font-size: 18px;
+			font-weight: 700;
+			line-height: 1.5em;
+		}
+		
+		.modal-close-link {
+			cursor: pointer;
+			color: #777;
+			height: 54px;
+			width: 54px;
+			padding: 0;
+			position: absolute;
+			top: 0;
+			right: 0;
+			text-align: center;
+			border: 0;
+			border-left: 1px solid #ddd;
+			background-color: transparent;
+			-webkit-transition: color 0.1s ease-in-out, background 0.1s ease-in-out;
+			transition: color 0.1s ease-in-out, background 0.1s ease-in-out;
+			
+			&::before {
+				font: normal 22px/50px 'dashicons' !important;
+				color: #666;
+				display: block;
+				content: '\f335';
+				font-weight: 300;
+			}
+			
+			&:hover, &:focus {
+				background: #ddd;
+				border-color: #ccc;
+				color: #000;
+			}
+			
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+	
+	article {
+		padding: 1.5em;
+		
+		p {
+			margin: 1.5em 0;
+			
+			&:first-child {
+				margin-top: 0;
+			}
+			
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+		
+		.pagination {
+			padding: 10px 0 0;
+			text-align: center;
+		}
+	}
+	
+	footer {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 100;
+		padding: 1em 1.5em;
+		background: #fcfcfc;
+		border-top: 1px solid #dfdfdf;
+		box-shadow: 0 -4px 4px -4px rgba(0, 0, 0, 0.1);
+		
+		.inner {
+			float: right;
+			line-height: 23px;
+			
+			.button {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+//
+// Select2
+//---------
+
+.select2-drop, .select2-dropdown {
+	z-index: 999999 !important;
+}
+
+.select2-results {
+	line-height: 1.5em;
+	
+	.select2-results__option, .select2-results__group {
+		margin: 0;
+		padding: 8px;
+	}
+}
+
+.select2-dropdown {
+	border-color: #DDD;
+}
+
+.select2-dropdown--below {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.select2-dropdown--above {
+	box-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.select2-container {
+	
+	.select2-selection__rendered.ui-sortable li {
+		cursor: move;
+	}
+	
+	.select2-selection {
+		border-color: #DDD;
+	}
+	
+	.select2-search__field {
+		min-width: 150px;
+	}
+	
+	.select2-selection--single {
+		height: 32px;
+		
+		.select2-selection__rendered {
+			line-height: 32px;
+			padding-right: 24px;
+		}
+		
+		.select2-selection__arrow {
+			right: 3px;
+			height: 30px;
+		}
+		
+	}
+	
+	.select2-selection--multiple {
+		min-height: 28px;
+		border-radius: 0;
+		line-height: 1.5;
+		
+		li {
+			margin: 0;
+		}
+		
+		.select2-selection__choice {
+			padding: 2px 6px;
+		}
+	}
+	
+	.select2-selection__clear {
+		color: #999;
+		margin-top: -1px;
+	}
+	
+	.select2-search--inline {
+		
+		.select2-search__field {
+			font-family: inherit;
+			font-size: inherit;
+			font-weight: inherit;
+			padding: 3px 0;
+		}
+		
+	}
+	
+	&, .selection, .select2-selection--single {
+		&:focus {
+			outline: none;
+		}
+	}
+	
+}
+
+//
+// Help tip
+//---------
+
+.atum-help-tip {
+	color: #666;
+	display: inline-block;
+	font-size: 1.1em;
+	font-style: normal;
+	height: 16px;
+	line-height: 16px;
+	position: relative;
+	vertical-align: middle;
+	width: 16px;
+	
+	&::after {
+		@include icon_dashicons( '\f223' );
+		cursor: help;
+	}
+}
+
+h2 .atum-help-tip {
+	margin-top: -5px;
+	margin-left: 0.25em;
+}
